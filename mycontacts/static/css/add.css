@@ -39,21 +39,22 @@ textarea {
 }
 
 .btn{
-	background: 0 0 #ffffff;
-    border: 1px solid #9FB0A9;
+	background: 0 0 #0b3B39;
+    border: 1px solid #0b3B39;
     border-radius: 3px;
-    color: #9FB0A9;
+    color: #E6EDF3;
     font-family: "Raleway", sans-serif;
     font-size: 16px;
     line-height: inherit;
     margin: 30px 0;
     padding: 10px 50px;
     text-transform: uppercase;
-    transition: all 0.25s ease 0s;
+    transition: 1s all ease;
 }
 
 .btn:hover,.btn:active, .btn:focus {
+	background-color: #ffffff96;
 	border-color: #0b3B39;
 	color: #0b3B39;
-	transform: translateX(-1px);
+	transform: translateX(-1px) scale(1.1);
 }
