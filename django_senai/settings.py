@@ -121,12 +121,7 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 # Define the directory where Django will collect static files during production.
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-# Additional directories where Django will look for static files.
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'mycontacts', 'static'),
-]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
