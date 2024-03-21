@@ -15,10 +15,11 @@ def add(request):
     """ This function is called to add one contact member to your contact list in your Database """
     if request.method == 'POST':
         
-        django_form = AddForm(request.POST)
+        django_form = AddForm(request.POST, request.FILES)
         if django_form.is_valid():
            
             """ Assign data in Django Form to local variables """
+            new_member_img = django_form.data.get()
             new_member_name = django_form.data.get("name")
             new_member_relation = django_form.data.get("relation")
             new_member_phone = django_form.data.get('phone')
