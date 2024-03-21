@@ -1,7 +1,26 @@
 from django.shortcuts import render
+from rest_framework.views import APIView
+from rest_framework import status
+from rest_framework.response import Response
 from .forms import AddForm
+from .serializers import PhotoSerializer
 from .models import Contact
-from django.http import HttpResponseRedirect
+
+class PhotoListCreateView(APIView):
+    name = 'photo_list_create_view'
+
+    def get(self, request):
+        photos = Contact.foto
+        serializer = PhotoSerializer(photos, many=True)
+        return Response(serializer.data,status = status.HTTP_200_OK)
+
+    def post(self, request):
+       serializer = PhotoSerializer(request.data)
+       if serializer.is_valid():
+           serializer.save()
+           return Response(serializer.data, status = status.HTTP_201_CREATED)
+       return Response(serializer.errorS, status = status.HTTP_406_NOT_ACCEPTABLE)
+
 
 def show(request):
     """ 
@@ -17,28 +36,13 @@ def add(request):
         
         django_form = AddForm(request.POST, request.FILES)
         if django_form.is_valid():
-           
-            """ Assign data in Django Form to local variables """
-            new_member_img = django_form.data.get()
-            new_member_name = django_form.data.get("name")
-            new_member_relation = django_form.data.get("relation")
-            new_member_phone = django_form.data.get('phone')
-            new_member_email = django_form.data.get('email')
-            
-            """ This is how your model connects to database and create a new member """
-            Contact.objects.create(
-                name =  new_member_name, 
-                relation = new_member_relation,
-                phone = new_member_phone,
-                email = new_member_email, 
-                )
-                 
+            new_contact = django_form.save(commit=False)
+            new_contact.img = request.FILES['foto']  # Atribuindo a imagem ao campo img
+            new_contact.save()
             contact_list = Contact.objects.all()
-            return render(request, 'mycontacts/show.html',{'contacts': contact_list})    
-        
+            return render(request, 'mycontacts/show.html', {'contacts': contact_list})
         else:
-            """ redirect to the same page if django_form goes wrong """
-            return render(request, 'mycontacts/add.html')
+            return render(request, 'mycontacts/add.html', {'form': django_form})
     else:
         return render(request, 'mycontacts/add.html')
 

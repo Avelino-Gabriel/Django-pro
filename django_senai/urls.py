@@ -16,12 +16,14 @@ Including another URLconf
 """
 from django.urls import re_path
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.static import serve
 from mycontacts import views
-from rest_framework import routers
-from imagens.views import ImagemViewSet
 
 urlpatterns = [
     re_path(r'^admin/', admin.site.urls),
     re_path(r'^$', views.show),
     re_path(r'^add/', views.add),
-]
+    re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
