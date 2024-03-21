@@ -130,6 +130,7 @@ body {
 .user_img{
 	width: 200px;
 	height: 200px;
+	border-radius: 100px;
 }
 
 .header h2 a {
