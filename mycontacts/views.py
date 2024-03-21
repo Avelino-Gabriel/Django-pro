@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -37,10 +37,11 @@ def add(request):
         django_form = AddForm(request.POST, request.FILES)
         if django_form.is_valid():
             new_contact = django_form.save(commit=False)
-            new_contact.img = request.FILES['foto']  # Atribuindo a imagem ao campo img
+            foto = request.FILES.get('foto')
+            if foto:
+                new_contact.foto = foto
             new_contact.save()
-            contact_list = Contact.objects.all()
-            return render(request, 'mycontacts/show.html', {'contacts': contact_list})
+            return redirect(show)
         else:
             return render(request, 'mycontacts/add.html', {'form': django_form})
     else:
