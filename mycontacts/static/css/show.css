@@ -76,6 +76,9 @@ html {
 }
 
 body {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 	background-color: #0D1117;
 	position: relative;
 	margin: 0;
