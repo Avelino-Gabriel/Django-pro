@@ -71,7 +71,7 @@ html {
 }
 
 .js-global-header-scrolling {
-	top: -4em;
+	transform: translateY(-4em);
 	/* Height of the header */
 }
 
@@ -102,14 +102,20 @@ body {
 }
 
 .header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	color: white;
 	background-color: #0B3B39;
 	width: 100%;
 	position: fixed;
 	text-align: center;
-	transition: top .2s ease-in;
+	transition: all ease .5s;
 }
 
+.end{
+	align-self: flex-end;
+}
 .header a {
 	text-decoration: none;
 	display: block;
@@ -136,12 +142,17 @@ body {
 	border-radius: 100px;
 }
 
+.header h2 {
+	width: 300px;
+}
+
 .header h2 a {
 	position: relative;
 	top: 20px;
 	text-decoration: none;
 	color: white;
 	padding: 0px 0px;
+	transition: 0.5s all ease;
 }
 
 .header h2 a:hover {
@@ -150,4 +161,9 @@ body {
 	background-color: #0B3B39;
 	padding: 0px 0px;
 	transform: scale(1.1);
+}
+
+.js-global-header-scrolling > h2{
+	position: relative;
+	transform: translateY(25px);
 }
