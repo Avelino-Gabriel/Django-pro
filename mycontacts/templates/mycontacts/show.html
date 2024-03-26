@@ -18,6 +18,7 @@
             <div class="phone">{{ contact.phone }}</div>
             <div class="email"><a href='{{ contact.email }}'>{{ contact.email }}</a> </div>
             <a href="{% url 'delete_contact' contact.id %}">Excluir</a>
+            <a href="{% url 'edit_contact' contact.id %}">Editar</a>
         </div>
     </li>
     {%  endfor %}

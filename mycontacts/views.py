@@ -1,26 +1,6 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from rest_framework.views import APIView
-from rest_framework import status
-from rest_framework.response import Response
 from .forms import AddForm
-from .serializers import PhotoSerializer
 from .models import Contact
-
-class PhotoListCreateView(APIView):
-    name = 'photo_list_create_view'
-
-    def get(self, request):
-        photos = Contact.foto
-        serializer = PhotoSerializer(photos, many=True)
-        return Response(serializer.data,status = status.HTTP_200_OK)
-
-    def post(self, request):
-       serializer = PhotoSerializer(request.data)
-       if serializer.is_valid():
-           serializer.save()
-           return Response(serializer.data, status = status.HTTP_201_CREATED)
-       return Response(serializer.errorS, status = status.HTTP_406_NOT_ACCEPTABLE)
-
 
 def show(request):
     """ 
@@ -56,5 +36,24 @@ def delete(request, contact_id):
             return redirect(show)
     return render(request, 'mycontacts/delete.html', {'contact': contact})
 
+def editar(request, id):
+    contact = Contact.objects.get(id=id) 
+    return render(request, 'mycontacts/edit.html', {'contact': contact})
 
+def update(request, id):
+    vfoto = request.FILES.get('foto')
+    vnome = request.POST.get('name')
+    vrelation = request.POST.get('relation')
+    vphone = request.POST.get('phone')
+    vemail = request.POST.get('email')
+
+    contact = Contact.objects.get(id=id) 
+    if vfoto:
+        contact.foto = vfoto
+    contact.name = vnome
+    contact.relation = vrelation
+    contact.phone = vphone
+    contact.email = vemail
+    contact.save()
+    return redirect(show)
     
