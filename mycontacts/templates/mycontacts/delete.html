@@ -1,0 +1,14 @@
+{% extends 'mycontacts/background.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1 class="text">Confirmar Exclusão</h1>
+    <p class="text">Tem certeza que deseja excluir o contato "{{ contact.name }}"?</p>
+    <form action="{% url 'delete_contact' contact.id %}" method="post">
+        {% csrf_token %}
+        <button class="btn" type="submit">Confirmar</button>
+    </form>
+</div>
+    
+{% endblock content %}

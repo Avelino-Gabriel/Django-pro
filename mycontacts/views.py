@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from rest_framework.views import APIView
 from rest_framework import status
 from rest_framework.response import Response
@@ -46,5 +46,15 @@ def add(request):
             return render(request, 'mycontacts/add.html', {'form': django_form})
     else:
         return render(request, 'mycontacts/add.html')
+    
+def delete(request, contact_id):
+    contact = get_object_or_404(Contact, id = contact_id)
+    if request.method == 'POST':
+            # Se o formulário foi submetido, exclua o contato
+            contact.delete()
+            # Redireciona para uma página de confirmação ou outra página após a exclusão
+            return redirect(show)
+    return render(request, 'mycontacts/delete.html', {'contact': contact})
+
 
     

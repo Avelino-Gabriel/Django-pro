@@ -14,7 +14,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.urls import re_path
+from django.urls import re_path, path
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
@@ -26,4 +26,5 @@ urlpatterns = [
     re_path(r'^$', views.show),
     re_path(r'^add/', views.add),
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    path('delete/<int:contact_id>/', views.delete, name='delete_contact'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

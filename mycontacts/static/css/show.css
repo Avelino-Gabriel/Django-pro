@@ -167,3 +167,11 @@ body {
 	position: relative;
 	transform: translateY(25px);
 }
+
+.container{
+	padding: 10%;
+}
+
+.container .text{
+	color: #fff;
+}
