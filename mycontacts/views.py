@@ -9,7 +9,6 @@ def etc(arquivo):
     dir = os.listdir(path)
     for file in dir:
         if file == arquivo:
-            print(file)
             os.remove(f'{path}/{file}')
 
 def show(request):
@@ -53,15 +52,24 @@ def editar(request, id):
 
 def update(request, id):
     vfoto = request.FILES.get('foto')
+    vdelete = request.POST.get('meu_valor')
     vnome = request.POST.get('name')
     vrelation = request.POST.get('relation')
     vphone = request.POST.get('phone')
     vemail = request.POST.get('email')
-
+    print(vdelete)
     contact = Contact.objects.get(id=id)
-    etc(contact.foto.name) 
+    
     if vfoto:
+        etc(contact.foto.name) 
         contact.foto = vfoto
+
+    print(vdelete)
+
+    if vdelete:
+        etc(contact.foto.name) 
+        contact.foto = None
+
     contact.name = vnome
     contact.relation = vrelation
     contact.phone = vphone

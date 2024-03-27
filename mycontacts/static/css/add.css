@@ -7,6 +7,12 @@ textarea {
 	padding-left: 15%;
 }
 
+.form{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
 .form-label {
 	font-size: 13px;
 	color: #0B3B39;
@@ -28,6 +34,10 @@ textarea {
 .form-control:focus {
 	box-shadow: none;
 	border-color: #0B3B39;
+}
+
+.form-group{
+	width: 100%;
 }
 
 .js-hide-label {
@@ -57,4 +67,10 @@ textarea {
 	border-color: #0b3B39;
 	color: #0b3B39;
 	transform: translateX(-1px) scale(1.1);
+}
+
+.black{
+	background-color: #0D1117;
+	color: #fff;
+	border: 1px #fff solid;
 }

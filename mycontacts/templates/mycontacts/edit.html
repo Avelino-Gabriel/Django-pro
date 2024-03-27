@@ -15,6 +15,8 @@
                 <input type="file" class="form-control" id="img" name="foto" placeholder="+ Upload" tabindex="1">
                 <p class="text">Foto atual: {{ contact.foto.name }}</p>
             </div>
+            <input type="hidden" name="meu_valor" id="meu-valor-input">
+            <button class="btn black" id="delete" name="delete">Excluir foto</button>
             <div class="form-group">
                 <label class="form-label">Nome</label>
                 <input type="text" class="form-control" id="name" name="name" placeholder="Nome" tabindex="1" required
@@ -42,5 +44,6 @@
         </form>
     </div>
 </div>
+<script type="text/javascript" src="{% static 'js/delete.js' %}"></script>
 
 {% endblock content %}
