@@ -1,6 +1,16 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from .forms import AddForm
 from .models import Contact
+import os
+from django_senai.settings import BASE_DIR
+
+def etc(arquivo):
+    path = f'{BASE_DIR}/media'
+    dir = os.listdir(path)
+    for file in dir:
+        if file == arquivo:
+            print(file)
+            os.remove(f'{path}/{file}')
 
 def show(request):
     """ 
@@ -31,6 +41,7 @@ def delete(request, contact_id):
     contact = get_object_or_404(Contact, id = contact_id)
     if request.method == 'POST':
             # Se o formulário foi submetido, exclua o contato
+            etc(contact.foto.name)
             contact.delete()
             # Redireciona para uma página de confirmação ou outra página após a exclusão
             return redirect(show)
