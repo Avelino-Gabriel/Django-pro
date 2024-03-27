@@ -58,7 +58,8 @@ def update(request, id):
     vphone = request.POST.get('phone')
     vemail = request.POST.get('email')
 
-    contact = Contact.objects.get(id=id) 
+    contact = Contact.objects.get(id=id)
+    etc(contact.foto.name) 
     if vfoto:
         contact.foto = vfoto
     contact.name = vnome
