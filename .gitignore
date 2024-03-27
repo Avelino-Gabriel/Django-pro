@@ -1,2 +1,5 @@
 venv
 db.sqlite3
+django_senai/__pycache__
+mycontacts/__pycache__
+mycontacts/migartions/__pycache__
