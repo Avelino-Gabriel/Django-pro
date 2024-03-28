@@ -44,29 +44,16 @@ def delete(request, contact_id):
 
 def editar(request, id):
     if request.method == 'POST':
-        vfoto = request.FILES.get('foto')
-        vdelete = request.POST.get('meu_valor')
-        vnome = request.POST.get('name')
-        vrelation = request.POST.get('relation')
-        vphone = request.POST.get('phone')
-        vemail = request.POST.get('email')
-        print(vdelete)
         contact = Contact.objects.get(id=id)
-        
-        if vfoto:
-            etc(contact.foto.name) 
-            contact.foto = vfoto
+        django_form = AddForm(request.POST, request.FILES, instance=contact)
+        if django_form.is_valid():
+            django_form.save()
+            if request.POST.get('delete'):
+                etc(contact.foto.name) 
+                contact.foto = None
 
-        if vdelete:
-            etc(contact.foto.name) 
-            contact.foto = None
-
-        contact.name = vnome
-        contact.relation = vrelation
-        contact.phone = vphone
-        contact.email = vemail
-        contact.save()
-        return redirect(show)
+            contact.save()
+            return redirect(show)
     else:
         contact = Contact.objects.get(id=id) 
         return render(request, 'mycontacts/edit.html', {'contact': contact})
