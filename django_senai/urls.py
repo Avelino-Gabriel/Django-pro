@@ -28,5 +28,4 @@ urlpatterns = [
     re_path(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
     path('delete/<int:contact_id>/', views.delete, name='delete_contact'),
     path('edit/<int:id>/', views.editar, name='edit_contact'),
-    path('update/<int:id>/', views.update, name='update_contact'),
 ] + static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

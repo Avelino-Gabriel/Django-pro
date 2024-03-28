@@ -22,13 +22,9 @@ def show(request):
 def add(request):
     """ This function is called to add one contact member to your contact list in your Database """
     if request.method == 'POST':
-        
         django_form = AddForm(request.POST, request.FILES)
         if django_form.is_valid():
             new_contact = django_form.save(commit=False)
-            foto = request.FILES.get('foto')
-            if foto:
-                new_contact.foto = foto
             new_contact.save()
             return redirect(show)
         else:
@@ -47,31 +43,34 @@ def delete(request, contact_id):
     return render(request, 'mycontacts/delete.html', {'contact': contact})
 
 def editar(request, id):
-    contact = Contact.objects.get(id=id) 
-    return render(request, 'mycontacts/edit.html', {'contact': contact})
+    if request.method == 'POST':
+        vfoto = request.FILES.get('foto')
+        vdelete = request.POST.get('meu_valor')
+        vnome = request.POST.get('name')
+        vrelation = request.POST.get('relation')
+        vphone = request.POST.get('phone')
+        vemail = request.POST.get('email')
+        print(vdelete)
+        contact = Contact.objects.get(id=id)
+        
+        if vfoto:
+            etc(contact.foto.name) 
+            contact.foto = vfoto
 
-def update(request, id):
-    vfoto = request.FILES.get('foto')
-    vdelete = request.POST.get('meu_valor')
-    vnome = request.POST.get('name')
-    vrelation = request.POST.get('relation')
-    vphone = request.POST.get('phone')
-    vemail = request.POST.get('email')
-    print(vdelete)
-    contact = Contact.objects.get(id=id)
+        if vdelete:
+            etc(contact.foto.name) 
+            contact.foto = None
+
+        contact.name = vnome
+        contact.relation = vrelation
+        contact.phone = vphone
+        contact.email = vemail
+        contact.save()
+        return redirect(show)
+    else:
+        contact = Contact.objects.get(id=id) 
+        return render(request, 'mycontacts/edit.html', {'contact': contact})
+
+
     
-    if vfoto:
-        etc(contact.foto.name) 
-        contact.foto = vfoto
-
-    if vdelete:
-        etc(contact.foto.name) 
-        contact.foto = None
-
-    contact.name = vnome
-    contact.relation = vrelation
-    contact.phone = vphone
-    contact.email = vemail
-    contact.save()
-    return redirect(show)
     
