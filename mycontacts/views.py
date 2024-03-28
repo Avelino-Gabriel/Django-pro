@@ -64,8 +64,6 @@ def update(request, id):
         etc(contact.foto.name) 
         contact.foto = vfoto
 
-    print(vdelete)
-
     if vdelete:
         etc(contact.foto.name) 
         contact.foto = None
