@@ -1,7 +1,5 @@
-from typing import Iterable
 from django.db import models
 import uuid 
-import os
 
 
 def uploadImageFormater(instance, filename):
